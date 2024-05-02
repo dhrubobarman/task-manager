@@ -1,0 +1,36 @@
+{
+  "name": "skeleton",
+  "bin": {
+    "skeleton": "./dist/index.js"
+  },
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node dist/index.js",
+    "build": "esbuild src/index.ts --platform=node --bundle --minify --outfile=dist/index.js",
+    "dev": "pnpm i && nodemon src/index.ts",
+    "unlink-cli": "pnpm unlink --global skeleton",
+    "link-cli": "pnpm unlink-cli && pnpm link --global skeleton"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@eslint/js": "^9.1.1",
+    "@types/node": "^20.12.7",
+    "esbuild": "^0.20.2",
+    "eslint": "^9.1.1",
+    "globals": "^15.0.0",
+    "nodemon": "^3.1.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.5",
+    "typescript-eslint": "^7.7.1"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "mongoose": "^8.3.3"
+  }
+}
