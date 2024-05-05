@@ -1,8 +1,9 @@
-import { Request, Response } from "express";
+import { Request, Response, NextFunction } from "express";
 import Task from "@/models/Task";
 import { z } from "zod";
 import { zodMongoId, zodTaskBody } from "@/zod/zodSchema";
 import asyncWrapper from "../middleware/async";
+import { createCustomError } from "../errors";
 
 const getAllTasks = asyncWrapper(async (req: Request, res: Response) => {
   const tasks = await Task.find().sort().select("-__v");
@@ -15,7 +16,7 @@ const createTask = asyncWrapper(async (req: Request, res: Response) => {
   return res.json({ data: task });
 });
 
-const getTask = asyncWrapper(async (req: Request, res: Response) => {
+const getTask = asyncWrapper(async (req: Request, res: Response, next: NextFunction) => {
   const paramSchema = z.object({
     id: zodMongoId,
   });
@@ -23,7 +24,7 @@ const getTask = asyncWrapper(async (req: Request, res: Response) => {
   const { id } = parsed;
   const task = await Task.findById(id).select("-__v");
   if (!task) {
-    return res.status(404).json({ error: `Task not found with id: ${id}` });
+    return next(createCustomError(`Task not found with id: ${id}`, 404));
   }
   return res.status(400).json({ data: task });
 });
