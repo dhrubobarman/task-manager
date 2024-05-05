@@ -17,9 +17,6 @@ importers:
       express:
         specifier: ^4.19.2
         version: 4.19.2
-      express-async-wrapper:
-        specifier: ^0.1.0
-        version: 0.1.0
       mongoose:
         specifier: ^8.3.3
         version: 8.3.3
@@ -704,9 +701,6 @@ packages:
   etag@1.8.1:
     resolution: {integrity: sha512-aIL5Fx7mawVa300al2BnEE4iNvo1qETxLrPI/o05L7z6go7fCw1J6EQmbK4FmJ2AS7kgVF/KEZWufBfdClMcPg==}
     engines: {node: '>= 0.6'}
-
-  express-async-wrapper@0.1.0:
-    resolution: {integrity: sha512-IEgllmSJeQvZRXMdTQoBwVW1n4aewzprNIiXx8rzRmhwvHn5dKezm6jSeXG1RoYJxIZYNqbFTGKJHC7PZ3PAQw==}
 
   express@4.19.2:
     resolution: {integrity: sha512-5T6nhjsT+EOMzuck8JjBHARTHfMht0POzlA60WV2pMD3gyXw2LZnZ+ueGdNxG+0calOJcWKbpFcuzLZ91YWq9Q==}
@@ -1988,8 +1982,6 @@ snapshots:
   esutils@2.0.3: {}
 
   etag@1.8.1: {}
-
-  express-async-wrapper@0.1.0: {}
 
   express@4.19.2:
     dependencies:
