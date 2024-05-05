@@ -13,7 +13,7 @@ export const axiosInstance = axios.create({
 
 const onErrorResponse = (
   error: AxiosError | Error,
-  toast: TToast,
+  toast?: TToast,
   setLoading?: (prev: boolean) => void
 ): Promise<AxiosError> => {
   if (axios.isAxiosError(error)) {
@@ -23,7 +23,7 @@ const onErrorResponse = (
 
     switch (status) {
       case 401: {
-        toast({
+        toast?.({
           variant: "destructive",
           title: "Error!",
           description: `🚨 [API] ${method?.toUpperCase()} ${url} | Error ${status} ${statusText} ${message}`,
@@ -43,7 +43,7 @@ const onErrorResponse = (
         break;
       }
       default: {
-        toast({
+        toast?.({
           variant: "destructive",
           title: "Error!",
           description: `🚨 [API] ${method?.toUpperCase()} ${url} | Error ${status} ${statusText} ${message}`,
@@ -56,10 +56,10 @@ const onErrorResponse = (
       sessionStorage.removeItem("token");
     }
   } else {
-    toast({
+    toast?.({
       variant: "destructive",
       title: "Error!",
-      description: `🚨 ${error}`,
+      description: `🚨 ${error?.error || "Something went wrong"}`,
     });
   }
   setLoading?.(false);
