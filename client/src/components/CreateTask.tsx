@@ -29,29 +29,36 @@ const CreateTask = ({
   };
 
   const createTask = async () => {
-    // setLoading(true);
-    const {
-      data: { data },
-    } = (await axiosInstance.post("/tasks/", values)) as {
-      data: { data: Task };
-    };
-    toast({
-      title: "New task created",
-    });
-    setTaskList((prev) => [...prev, data]);
-    setValues(initialValue);
+    try {
+      setLoading(true);
+      const {
+        data: { data },
+      } = (await axiosInstance.post("/tasks/", values)) as {
+        data: { data: Task };
+      };
+      toast({
+        title: "New task created",
+      });
+      setTaskList((prev) => [...prev, data]);
+      setValues(initialValue);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const deleteAll = async () => {
-    const idList = allTasks?.map((task) => task._id);
-    // setLoading(true);
-    const response = await axiosInstance.post(`/tasks/delete`, idList);
-    toast({
-      variant: "destructive",
-      title: "Success",
-      description: response.data.message,
-    });
-    setTaskList([]);
+    try {
+      const idList = allTasks?.map((task) => task._id);
+      setLoading(true);
+      const response = await axiosInstance.post(`/tasks/delete`, idList);
+      toast({
+        variant: "destructive",
+        title: "Success",
+        description: response.data.message,
+      });
+      setTaskList([]);
+    } finally {
+    }
   };
 
   return (
