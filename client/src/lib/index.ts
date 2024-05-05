@@ -1,4 +1,4 @@
-import { axiosInstance } from "./axios";
+import { axiosInstance, useAxios } from "./useAxios";
 import { cn } from "./utils";
 
-export { axiosInstance, cn };
+export { axiosInstance, cn, useAxios };

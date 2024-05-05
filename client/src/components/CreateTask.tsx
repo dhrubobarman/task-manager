@@ -1,4 +1,4 @@
-import { axiosInstance } from "../lib";
+import { useAxios } from "../lib/useAxios";
 import { GoPlus } from "react-icons/go";
 import { useState } from "react";
 import { useToast } from "./use-toast";
@@ -20,6 +20,7 @@ const CreateTask = ({
   const { toast } = useToast();
   const [values, setValues] = useState(initialValue);
   const [loading, setLoading] = useState(false);
+  const axiosInstance = useAxios(setLoading);
 
   const handleInput = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -28,46 +29,29 @@ const CreateTask = ({
   };
 
   const createTask = async () => {
-    setLoading(true);
-    try {
-      const {
-        data: { data },
-      } = (await axiosInstance.post("/tasks/", values)) as {
-        data: { data: Task };
-      };
-      toast({
-        title: "New task created",
-      });
-      setTaskList((prev) => [...prev, data]);
-      setValues(initialValue);
-    } catch (error: { error: { response: { data: { error: string } } } }) {
-      toast({
-        variant: "destructive",
-        title: "Something Went Wrong",
-        description: error?.response?.data.error,
-      });
-      console.log(error);
-    } finally {
-      setLoading(false);
-    }
+    // setLoading(true);
+    const {
+      data: { data },
+    } = (await axiosInstance.post("/tasks/", values)) as {
+      data: { data: Task };
+    };
+    toast({
+      title: "New task created",
+    });
+    setTaskList((prev) => [...prev, data]);
+    setValues(initialValue);
   };
 
   const deleteAll = async () => {
     const idList = allTasks?.map((task) => task._id);
-    setLoading(true);
-    try {
-      const response = await axiosInstance.post(`/tasks/delete`, idList);
-      toast({
-        variant: "destructive",
-        title: "Success",
-        description: response.data.message,
-      });
-      setTaskList([]);
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setLoading(false);
-    }
+    // setLoading(true);
+    const response = await axiosInstance.post(`/tasks/delete`, idList);
+    toast({
+      variant: "destructive",
+      title: "Success",
+      description: response.data.message,
+    });
+    setTaskList([]);
   };
 
   return (
