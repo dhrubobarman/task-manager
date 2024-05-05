@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --common-border-color: rgb(84, 83, 83);
+}
+
+* {
+  border-color: var(--common-border-color);
+}

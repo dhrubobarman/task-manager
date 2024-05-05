@@ -15,10 +15,11 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "moduleResolution": "node16",
+    "noUnusedLocals": false,
     "baseUrl": "./",
     "paths": {
       "@/*": ["./src/*"]
     }
   },
-  "include": ["src"]
+  "include": ["./src/**/*.ts", ".eslintrc.cjs"]
 }
